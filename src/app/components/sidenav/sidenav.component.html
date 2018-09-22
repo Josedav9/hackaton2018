@@ -1,0 +1,43 @@
+<div class="example-container">
+
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Stackunderflow</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-sidenav-container class="size">
+    <mat-sidenav #sidenav mode="side">
+      <mat-nav-list>
+        <span>
+          <a mat-list-item>
+            <mat-icon>home</mat-icon> &nbsp; Inicio
+          </a>
+        </span>
+        <span>
+          <a mat-list-item>
+            <mat-icon>map</mat-icon> &nbsp; Mapa Del Sistema
+          </a>
+        </span>
+        <span>
+          <a mat-list-item>
+            <mat-icon>view_list</mat-icon> &nbsp; Matrices O/D
+          </a>
+        </span>
+        <span>
+          <a mat-list-item>
+            <mat-icon>linear_scale</mat-icon> &nbsp; Heatmaps
+          </a>
+        </span>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content (click)="sidenav.toggle(false)">
+      <div>
+        Lalalala
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
