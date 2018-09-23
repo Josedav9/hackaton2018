@@ -5,7 +5,7 @@
       <button *ngIf="hayUsuario()" mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>Stackunderflow</span>
+      <img src="assets/img/BICLAP-LOGO-TRANS.png" alt="">
     </mat-toolbar-row>
   </mat-toolbar>
   <mat-sidenav-container class="size">
@@ -24,6 +24,11 @@
         <span>
           <a routerLink='/matrices' mat-list-item>
             <mat-icon>view_list</mat-icon> &nbsp; Matrices O/D
+          </a>
+        </span>
+        <span>
+          <a routerLink='/viajes' mat-list-item>
+            <mat-icon>timeline</mat-icon> &nbsp; Viajes
           </a>
         </span>
         <span *ngIf="hayUsuario()" >

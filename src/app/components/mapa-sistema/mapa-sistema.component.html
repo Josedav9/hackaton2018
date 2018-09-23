@@ -1,6 +1,8 @@
 <!-- this creates a google map on the page with the given lat/lng from -->
 <!-- the component as the initial center of the map: -->
 <agm-map (mapRightClick)="crearMarcador($event)" [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+  <agm-direction *ngIf="hayRecorrido()" [origin]="origen" [destination]="destino">
+  </agm-direction>
   <agm-marker *ngFor="let estacion of estaciones | async" [title]=estacion.nombre [latitude]="estacion.lat" [longitude]="estacion.lon"
     iconUrl="assets/img/mountainbiking-3.png">
     <agm-info-window>

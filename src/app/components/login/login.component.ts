@@ -27,11 +27,12 @@ export class LoginComponent implements OnInit {
         usuario.id = res.user.uid;
         localStorage.setItem('usuario', JSON.stringify( usuario ));
         this.router.navigate(['home'])
-        this.cargando = true
+        
       })
     }).catch(err =>{
       console.log(err)
       this.sinExito = err;
+      this.cargando = false
     })
   }
 

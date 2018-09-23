@@ -12,6 +12,8 @@ import { FirebaseService } from './services/firebase.service'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //Material
 import { AppMaterialModule } from './app.material.module';
+//Charts
+import { ChartsModule } from 'ng2-charts';
 //AngularFire
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -22,8 +24,12 @@ import { MapaSistemaComponent } from './components/mapa-sistema/mapa-sistema.com
 import { MatricesComponent } from './components/matrices/matrices.component';
 import { HomeComponent } from './components/home/home.component';
 import { AgmCoreModule } from '@agm/core';
+import { AgmDirectionModule } from 'agm-direction';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrarComponent } from './components/registrar/registrar.component';
+import { ViajesComponent } from './components/viajes/viajes.component';
+import { ViajeComponent } from './components/viaje/viaje.component';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +40,8 @@ import { RegistrarComponent } from './components/registrar/registrar.component';
     HomeComponent,
     LoginComponent,
     RegistrarComponent,
+    ViajesComponent,
+    ViajeComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +55,9 @@ import { RegistrarComponent } from './components/registrar/registrar.component';
     AppRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyC8lr_1IlZNloVE8K_BfPu64w9x1DcB3XM'
-    })
+    }),
+    AgmDirectionModule,
+    ChartsModule
   ],
   providers: [
     FirebaseService

@@ -6,6 +6,8 @@ import { MapaSistemaComponent } from './components/mapa-sistema/mapa-sistema.com
 import { MatricesComponent } from './components/matrices/matrices.component'
 import { LoginComponent } from './components/login/login.component'
 import { RegistrarComponent } from './components/registrar/registrar.component'
+import { ViajesComponent } from './components/viajes/viajes.component'
+import { ViajeComponent } from './components/viaje/viaje.component'
 
 const routes: Route[] = [
     { path: 'login', component: LoginComponent },
@@ -13,6 +15,8 @@ const routes: Route[] = [
     { path: 'inicio', component: HomeComponent },
     { path: 'mapaSistema', component: MapaSistemaComponent },
     { path: 'matrices', component: MatricesComponent },
+    { path: 'viajes', component: ViajesComponent  },
+    { path: 'viaje/:id', component: ViajeComponent },
     { path: '**', component: HomeComponent },
 
     //{ path: 'path/:routeParam', component: MyComponent },

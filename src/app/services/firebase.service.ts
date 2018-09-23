@@ -58,6 +58,7 @@ export class FirebaseService {
                 }
             ]
         }
+        localStorage.setItem('recorrido', JSON.stringify(viaje.recorrido))
         this.stationCollection.doc(`${estacion.id}`).update({ 'bicicletas': estacion.bicicletas })
             .then(res => {
                 this.usersCollection.doc(`${usuario.id}`).update({ 'prestada': bicicleta }).then(
@@ -86,14 +87,16 @@ export class FirebaseService {
         let usuario: User = JSON.parse(localStorage.getItem('usuario'))
         let fecha_fin = new Date()
         let est_destino = estacion.nombre;
-        let viaje = [{
+        let nueva = {
             lat: estacion.lat,
             lon: estacion.lon
-        }]
-        let trip;
+        }
+        let recorrido = JSON.parse(localStorage.getItem('recorrido'))
+        recorrido.push(nueva)
         estacion.bicicletas.push(usuario.prestada);
+        
         return this.usersCollection.doc(usuario.id).collection('viajes').doc(usuario.viaje_actual)
-            .set({ 'est_destino': est_destino, 'fecha_fin': fecha_fin, 'recorrido': viaje }, {merge: true}).then(
+            .set({ 'est_destino': est_destino, 'fecha_fin': fecha_fin, 'recorrido': recorrido }, {merge: true}).then(
                 res => this.bikeCollection.doc(usuario.prestada).collection('viajes').doc(usuario.viaje_actual)
                     .update({ 'est_destino': est_destino, 'fecha_fin': fecha_fin }).then(
                         res => this.tripCollection.doc(usuario.viaje_actual).update({ 'est_destino': est_destino, 'fecha_fin': fecha_fin }).then(
@@ -102,7 +105,8 @@ export class FirebaseService {
                                     usuario.viaje_actual = null;
                                     usuario.prestada = null;
                                     localStorage.setItem('usuario', JSON.stringify(usuario))
-                                    this.usersCollection.doc(usuario.id).update({ 'viaje_actual': null, 'prestada': null }).then(
+                                    localStorage.removeItem('recorrido')
+                                    this.usersCollection.doc(usuario.id).update({ 'viaje_actual': null, 'prestada': null, 'llegadas': {TM1: 30} }).then(
                                         res => this.stationCollection.doc(estacion.id).update({'bicicletas': estacion.bicicletas})
                                     )
                                 }
@@ -110,6 +114,16 @@ export class FirebaseService {
                         )
                     )
             )
+    }
+
+    viajesUsuario(){
+        const usuario = JSON.parse(localStorage.getItem('usuario'));
+        return this.usersCollection.doc(usuario.id).collection('viajes').snapshotChanges()
+    }
+
+    viaje(id){
+        const usuario = JSON.parse(localStorage.getItem('usuario'));
+        return this.usersCollection.doc(usuario.id).collection('viajes').doc(id);
     }
 
 }

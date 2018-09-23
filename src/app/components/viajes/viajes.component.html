@@ -1,0 +1,15 @@
+<div class="container">
+  <h1 class="text-center"> Viajes De Usuario </h1>
+  <hr>
+  <div class="row">
+
+    <div *ngFor="let viaje of viajes | async" class="card col-3">
+      <div class="card-body">
+        <h5 class="card-title"> Origen: {{viaje.est_origin}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Destino: {{ viaje.est_destino }}</h6>
+        <a (click)='navegar(viaje)'class="card-link">Mas Info</a>
+      </div>
+    </div>
+  </div>
+
+</div>

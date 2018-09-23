@@ -19,6 +19,9 @@ export class MapaSistemaComponent implements OnInit {
 
   estaciones: any
 
+  origen;
+  destino;
+
   constructor(public _fs: FirebaseService) { }
 
   ngOnInit() {
@@ -59,13 +62,29 @@ export class MapaSistemaComponent implements OnInit {
     }
   }
 
+  hayRecorrido(){
+    if(this.origen && this.destino){
+      return true
+    }else{
+      return false
+    }
+  }
+
 
   tomarBicicleta(estacion) {
     let id_bicicleta = estacion.bicicletas.pop()
+    this.origen = {
+      lat: estacion.lat,
+      lng: estacion.lon
+    }
     this._fs.tomarPrestadaBicicleta(id_bicicleta, estacion)
   }
 
   regresarBicicleta(estacion) {
+    this.destino = {
+      lat: estacion.lat,
+      lng: estacion.lon
+    }
     this._fs.regresarBicicleta( estacion )
   }
 
