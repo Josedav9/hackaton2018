@@ -3,6 +3,7 @@ import { FirebaseService } from '../../services/firebase.service'
 import { station } from '../../interfaces/station.interface'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { User } from '../../interfaces/user.interface';
 
 @Component({
   selector: 'app-mapa-sistema',
@@ -22,19 +23,19 @@ export class MapaSistemaComponent implements OnInit {
 
   ngOnInit() {
     this.estaciones = this._fs.obtenerEstaciones().snapshotChanges().pipe(
-      map(actions => actions.map( a => {
+      map(actions => actions.map(a => {
         const data = a.payload.doc.data() as station
         const id = a.payload.doc.id
-        return {id, ...data}
+        return { id, ...data }
       }))
     )
   }
 
   crearMarcador(event) {
-    let estacion:station={
+    let estacion: station = {
       lat: event.coords.lat,
       lon: event.coords.lng,
-      nombre: "pepito",
+      nombre: "Estacion",
       tipo: "normal",
       espacios: 3,
       bicicletas: []
@@ -45,26 +46,27 @@ export class MapaSistemaComponent implements OnInit {
     ).catch(err => console.log(err))
   }
 
-  verificarEstado(estacion){
-    console.log(estacion)
-    if (!this.viaje) {this.tomarBicicleta(estacion)}
-    else {this.devolverBicicleta(estacion)}
-  }
-
-  tomarBicicleta(estacion){
-    if(estacion.bicicletas.length > 0){
-      this.viaje = true
-      estacion.espacios = estacion.espacios + 1;
-      estacion.bicicletas.pop()
-    }else{
-      console.log('NO HAY CICLAS CARE NALGA')
+  tengoViaje() {
+    if (localStorage.getItem('usuario')) {
+      let usuario: User = JSON.parse(localStorage.getItem('usuario'));
+      if (usuario.prestada) {
+        return true
+      } else {
+        return false
+      }
+    } else {
+      return false
     }
   }
 
-  devolverBicicleta(estacion){
-    this.viaje = !this.viaje
-    estacion.espacios = estacion.espacios - 1;
-    estacion.bicicletas.push('I SEE A LINE OF CARS AND I WANT TO PAINT THEM BLACK')
+
+  tomarBicicleta(estacion) {
+    let id_bicicleta = estacion.bicicletas.pop()
+    this._fs.tomarPrestadaBicicleta(id_bicicleta, estacion)
+  }
+
+  regresarBicicleta(estacion) {
+    this._fs.regresarBicicleta( estacion )
   }
 
 }

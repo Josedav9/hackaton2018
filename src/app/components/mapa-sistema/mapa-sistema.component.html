@@ -1,22 +1,22 @@
 <!-- this creates a google map on the page with the given lat/lng from -->
 <!-- the component as the initial center of the map: -->
-<agm-map (mapRightClick)="crearMarcador($event)"
-    [latitude]="lat" [longitude]="lng" [zoom]="zoom">
-  <agm-marker *ngFor="let estacion of estaciones | async"
-            [title] = estacion.nombre
-            [latitude]="estacion.lat" 
-            [longitude]="estacion.lon" 
-            iconUrl="assets/img/mountainbiking-3.png">
-            <agm-info-window>
-              <strong>{{ estacion.nombre | uppercase }}</strong>
-              <hr>
-              <div *ngIf='estacion["bicicletas"].length != undefined'>
-               <p>Bicicletas: {{ estacion['bicicletas'].length}} <br>
-                   Espacios Disponibles:
-                </p>
-                <span (click)="verificarEstado(estacion)"
-                    class="badge badge-success puntero"><i class="fas fa-trash"></i>Tomar Bicicleta</span>
-              </div>
-            </agm-info-window>
-          </agm-marker>
+<agm-map (mapRightClick)="crearMarcador($event)" [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+  <agm-marker *ngFor="let estacion of estaciones | async" [title]=estacion.nombre [latitude]="estacion.lat" [longitude]="estacion.lon"
+    iconUrl="assets/img/mountainbiking-3.png">
+    <agm-info-window>
+      <strong>{{ estacion.nombre | uppercase }}</strong>
+      <hr>
+      <div *ngIf='estacion["bicicletas"].length != undefined'>
+        <p>Bicicletas: {{ estacion['bicicletas'].length}} <br>
+          Espacios Disponibles: {{ estacion.espacios - estacion.bicicletas.length }}
+        </p>
+        <span *ngIf="!tengoViaje()" 
+        (click)="tomarBicicleta(estacion)" 
+        class="badge badge-success puntero">Tomar Bicicleta</span>
+        <span *ngIf="tengoViaje()"
+        (click)="regresarBicicleta(estacion)" 
+        class="badge badge-primary puntero">Regresar Bicicleta</span>
+      </div>
+    </agm-info-window>
+  </agm-marker>
 </agm-map>

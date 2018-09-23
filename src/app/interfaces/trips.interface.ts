@@ -4,8 +4,8 @@ export interface trip{
     est_destino?: string,
     fecha_ini: Date,
     fecha_fin?: Date,
-    recorrido:{
+    recorrido:[{
         lat:number,
         lon:number
-    }
+    }]
 }

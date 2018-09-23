@@ -4,5 +4,6 @@ export interface User{
     apellido: string,
     telefono: string,
     cedula: string,
-    prestada: string
+    prestada: string,
+    viaje_actual?: string
 }

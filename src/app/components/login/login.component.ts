@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.cargando = true
-    console.log(this.password, this.correo)
     this._fs.login( this.correo, this.password ).then(res =>{
       this.db.doc<User>(`usuario/${ res.user.uid }`).valueChanges().subscribe( user =>{
         let usuario:User = user;
