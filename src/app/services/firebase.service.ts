@@ -11,7 +11,7 @@ import { trip } from '../interfaces/trips.interface'
 export class FirebaseService {
     private usersCollection: AngularFirestoreCollection<User>
     private bikeCollection: AngularFirestoreCollection<bikes>
-    private stationCollection: AngularFirestoreCollection<station>
+    public stationCollection: AngularFirestoreCollection<station>
     private tripCollection: AngularFirestoreCollection<trip>
 
     constructor( public db:AngularFirestore ){
@@ -34,9 +34,6 @@ export class FirebaseService {
     }
 
     obtenerEstaciones(){
-        return this.stationCollection.valueChanges()
+        return this.stationCollection
     }
-
-
-
 }
