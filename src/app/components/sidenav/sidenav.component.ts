@@ -12,6 +12,18 @@ export class SidenavComponent implements OnInit {
 
   constructor() { }
 
+  hayUsuario(){
+    if(localStorage.getItem('usuario')){
+      return true
+    }else{
+      return false
+    }
+  }
+
+  logout(){
+    localStorage.removeItem('usuario');
+  }
+
   ngOnInit() {
   }
 

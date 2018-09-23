@@ -2,7 +2,7 @@
 
   <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <button mat-icon-button (click)="sidenav.toggle()">
+      <button *ngIf="hayUsuario()" mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
       <span>Stackunderflow</span>
@@ -26,9 +26,9 @@
             <mat-icon>view_list</mat-icon> &nbsp; Matrices O/D
           </a>
         </span>
-        <span>
-          <a routerLink='/mapaCalor' mat-list-item>
-            <mat-icon>linear_scale</mat-icon> &nbsp; Heatmaps
+        <span *ngIf="hayUsuario()" >
+          <a routerLink='/login' (click)='logout()' mat-list-item>
+            <mat-icon>power_settings_new</mat-icon> &nbsp; Cerrar Sesion
           </a>
         </span>
       </mat-nav-list>

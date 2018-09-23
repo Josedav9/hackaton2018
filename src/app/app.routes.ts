@@ -4,7 +4,12 @@ import { NgModule } from '@angular/core';
 import { HomeComponent } from './components/home/home.component'
 import { MapaSistemaComponent } from './components/mapa-sistema/mapa-sistema.component'
 import { MatricesComponent } from './components/matrices/matrices.component'
+import { LoginComponent } from './components/login/login.component'
+import { RegistrarComponent } from './components/registrar/registrar.component'
+
 const routes: Route[] = [
+    { path: 'login', component: LoginComponent },
+    { path: 'registro', component: RegistrarComponent },
     { path: 'inicio', component: HomeComponent },
     { path: 'mapaSistema', component: MapaSistemaComponent },
     { path: 'matrices', component: MatricesComponent },

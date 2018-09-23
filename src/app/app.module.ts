@@ -22,6 +22,8 @@ import { MapaSistemaComponent } from './components/mapa-sistema/mapa-sistema.com
 import { MatricesComponent } from './components/matrices/matrices.component';
 import { HomeComponent } from './components/home/home.component';
 import { AgmCoreModule } from '@agm/core';
+import { LoginComponent } from './components/login/login.component';
+import { RegistrarComponent } from './components/registrar/registrar.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { AgmCoreModule } from '@agm/core';
     SidenavComponent,
     MapaSistemaComponent,
     MatricesComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    RegistrarComponent,
   ],
   imports: [
     BrowserModule,
