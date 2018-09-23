@@ -10,11 +10,13 @@
             <agm-info-window>
               <strong>{{ estacion.nombre | uppercase }}</strong>
               <hr>
-              <p>Bicicletas: {{ estacion['bicicletas']}} <br>
-                 Espacios Disponibles:
-              </p>
-              <span (click)="tomarBicicleta()"
+              <div *ngIf='estacion["bicicletas"].length != undefined'>
+               <p>Bicicletas: {{ estacion['bicicletas'].length}} <br>
+                   Espacios Disponibles:
+                </p>
+                <span (click)="verificarEstado(estacion)"
                     class="badge badge-success puntero"><i class="fas fa-trash"></i>Tomar Bicicleta</span>
+              </div>
             </agm-info-window>
           </agm-marker>
 </agm-map>

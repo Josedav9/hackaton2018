@@ -12,7 +12,7 @@ import { AngularFireAuth } from '@angular/fire/auth'
 export class FirebaseService {
     private usersCollection: AngularFirestoreCollection<User>
     private bikeCollection: AngularFirestoreCollection<bikes>
-    private stationCollection: AngularFirestoreCollection<station>
+    public stationCollection: AngularFirestoreCollection<station>
     private tripCollection: AngularFirestoreCollection<trip>
 
     constructor(public db: AngularFirestore, public fauth: AngularFireAuth) {
@@ -46,10 +46,7 @@ export class FirebaseService {
         return this.stationCollection.add(estacion)
     }
 
-    obtenerEstaciones() {
-        return this.stationCollection.valueChanges()
+    obtenerEstaciones(){
+        return this.stationCollection
     }
-
-
-
 }
