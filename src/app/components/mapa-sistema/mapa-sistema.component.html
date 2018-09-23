@@ -6,5 +6,15 @@
             [title] = estacion.nombre
             [latitude]="estacion.lat" 
             [longitude]="estacion.lon" 
-            iconUrl="assets/img/mountainbiking-3.png"></agm-marker>
+            iconUrl="assets/img/mountainbiking-3.png">
+            <agm-info-window>
+              <strong>{{ estacion.nombre | uppercase }}</strong>
+              <hr>
+              <p>Bicicletas: {{ estacion['bicicletas']}} <br>
+                 Espacios Disponibles:
+              </p>
+              <span (click)="tomarBicicleta()"
+                    class="badge badge-success puntero"><i class="fas fa-trash"></i>Tomar Bicicleta</span>
+            </agm-info-window>
+          </agm-marker>
 </agm-map>
